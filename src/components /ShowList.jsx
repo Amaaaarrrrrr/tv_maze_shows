@@ -1,13 +1,25 @@
-// work here andrew
 import React from "react";
+import ShowCard from "./ShowCard";
 
+const ShowList = ({ shows, onFavoriteToggle, onMoreDetails, isLoading }) => {
+  if (isLoading) {
+    return <p className="loading">Loading shows... ⌛️</p>;
+  }
 
-const ShowList = ({ shows, onFavoriteToggle, onMoreDetails }) => {
   return (
     <div className="show-list">
-      {shows.map((show) => (
-        <ShowCard key={show.id} show={show} onFavoriteToggle={onFavoriteToggle} onMoreDetails={onMoreDetails} />
-      ))}
+      {shows.length > 0 ? (
+        shows.map((show) => (
+          <ShowCard 
+            key={show.id} 
+            show={show} 
+            onFavoriteToggle={onFavoriteToggle} 
+            onMoreDetails={onMoreDetails} 
+          />
+        ))
+      ) : (
+        <p className="no-results">No shows found. Try searching for something else! :x:</p>
+      )}
     </div>
   );
 };
